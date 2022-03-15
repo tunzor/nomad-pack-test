@@ -1,20 +1,20 @@
-job "hashicups" {
+job "hashicups-with-connect" {
   type   = "service"
-  region = "[[ .hashicups.region ]]"
-  datacenters = [ [[ range $idx, $dc := .hashicups.datacenters ]][[if $idx]],[[end]][[ $dc | quote ]][[ end ]] ]
+  region = "[[ .hashicups-with-connect.region ]]"
+  datacenters = [ [[ range $idx, $dc := .hashicups-with-connect.datacenters ]][[if $idx]],[[end]][[ $dc | quote ]][[ end ]] ]
 
   group "frontend" {
     network {
       mode = "bridge"
       port "http" {
-        static = [[ .hashicups.frontend_ui_port ]]
+        static = [[ .hashicups-with-connect.frontend_ui_port ]]
       }
     }
 
-    [[ if .hashicups.register_consul_service ]]
+    [[ if .hashicups-with-connect.register_consul_service ]]
     service {
       name = "frontend"
-      port = "[[ .hashicups.frontend_ui_port ]]"
+      port = "[[ .hashicups-with-connect.frontend_ui_port ]]"
 
       connect {
         sidecar_service {
@@ -33,11 +33,11 @@ job "hashicups" {
       driver = "docker"
 
       env {
-          PORT = [[ .hashicups.frontend_ui_port ]]
+          PORT = [[ .hashicups-with-connect.frontend_ui_port ]]
       }
 
       config {
-        image = "hashicorpdemoapp/frontend:v[[ .hashicups.frontend_version ]]"
+        image = "hashicorpdemoapp/frontend:v[[ .hashicups-with-connect.frontend_version ]]"
         ports = ["http"]
         extra_hosts = ["public-api:127.0.0.1"]
         mount {
@@ -79,7 +79,7 @@ job "hashicups" {
       mode = "bridge"
     }
 
-    [[ if .hashicups.register_consul_service ]]
+    [[ if .hashicups-with-connect.register_consul_service ]]
     service {
       name = "product-public-api"
       port = "8080"
@@ -105,7 +105,7 @@ job "hashicups" {
       driver = "docker"
 
       config {
-        image   = "hashicorpdemoapp/public-api:v[[ .hashicups.public_api_version ]]"
+        image   = "hashicorpdemoapp/public-api:v[[ .hashicups-with-connect.public_api_version ]]"
       }
 
       env {
@@ -120,7 +120,7 @@ job "hashicups" {
       mode = "bridge"
     }
 
-    [[ if .hashicups.register_consul_service ]]
+    [[ if .hashicups-with-connect.register_consul_service ]]
     service {
       name = "payment-api"
       port = "8080"
@@ -135,7 +135,7 @@ job "hashicups" {
       driver = "docker"
 
       config {
-        image = "hashicorpdemoapp/payments:v[[ .hashicups.payments_version ]]"
+        image = "hashicorpdemoapp/payments:v[[ .hashicups-with-connect.payments_version ]]"
       }
     }
   }
@@ -148,7 +148,7 @@ job "hashicups" {
       }
     }
 
-    [[ if .hashicups.register_consul_service ]]
+    [[ if .hashicups-with-connect.register_consul_service ]]
     service {
       name = "product-api"
       port = "9090"
@@ -179,12 +179,12 @@ job "hashicups" {
       driver = "docker"
 
       config {
-        image   = "hashicorpdemoapp/product-api:v[[ .hashicups.product_api_version ]]"
+        image   = "hashicorpdemoapp/product-api:v[[ .hashicups-with-connect.product_api_version ]]"
       }
 
       env {
         CONFIG_FILE = "/config/config.json"
-				DB_CONNECTION = "host=localhost port=5000 user=[[ .hashicups.postgres_user ]] password=[[ .hashicups.postgress_password ]] dbname=[[ .hashicups.posgres_db ]] sslmode=disable"
+				DB_CONNECTION = "host=localhost port=5000 user=[[ .hashicups-with-connect.postgres_user ]] password=[[ .hashicups-with-connect.postgress_password ]] dbname=[[ .hashicups-with-connect.posgres_db ]] sslmode=disable"
 				BIND_ADDRESS = "0.0.0.0:9090"
       }
     }
@@ -195,7 +195,7 @@ job "hashicups" {
       mode = "bridge"
     }
 
-    [[ if .hashicups.register_consul_service ]]
+    [[ if .hashicups-with-connect.register_consul_service ]]
     service {
       name = "product-db"
       port = "5432"
@@ -210,13 +210,13 @@ job "hashicups" {
       driver = "docker"
 
       config {
-        image = "hashicorpdemoapp/product-api-db:v[[ .hashicups.product_api_db_version ]]"
+        image = "hashicorpdemoapp/product-api-db:v[[ .hashicups-with-connect.product_api_db_version ]]"
       }
 
       env {
-        POSTGRES_DB       = "[[ .hashicups.posgres_db ]]"
-        POSTGRES_USER     = "[[ .hashicups.postgres_user ]]"
-        POSTGRES_PASSWORD = "[[ .hashicups.postgress_password ]]"
+        POSTGRES_DB       = "[[ .hashicups-with-connect.posgres_db ]]"
+        POSTGRES_USER     = "[[ .hashicups-with-connect.postgres_user ]]"
+        POSTGRES_PASSWORD = "[[ .hashicups-with-connect.postgress_password ]]"
       }
     }
   }
