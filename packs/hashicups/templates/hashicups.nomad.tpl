@@ -34,7 +34,7 @@ job "hashicups" {
     task "db" {
       driver = "docker"
       config {
-        image   = "hashicorpdemoapp/public-api-db:[[ .hashicups.public_api_db_version ]]"
+        image   = "hashicorpdemoapp/product-api-db:[[ .hashicups.product-api-db_version ]]"
         ports = ["db"]
       }
       env {
@@ -67,7 +67,7 @@ job "hashicups" {
     task "public-api" {
       driver = "docker"
       config {
-        image   = "hashicorpdemoapp/public_api:[[ .hashicups.public_api_version ]]"
+        image   = "hashicorpdemoapp/public-api:[[ .hashicups.public_api_version ]]"
         ports = ["public-api"]
       }
       env {
