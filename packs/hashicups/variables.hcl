@@ -30,13 +30,12 @@ variable "product_api_version" {
   default = "v0.0.20"
 }
 
-
 variable "product_api_db_version" {
   description = "Docker version tag"
   default = "v0.0.20"
 }
 
-variable "posgres_db" {
+variable "postgres_db" {
   description = "Postgres DB name"
   default = "products"
 }
@@ -50,16 +49,3 @@ variable "postgress_password" {
   description = "Postgres DB Password"
   default = "password"
 }
-
-variable "frontend_ui_port" {
-  description = "HTTP UI port"
-  default = 80
-}
-
-
-variable "register_consul_service" {
-  description = "If you want to register a consul service for the job"
-  type        = bool
-  default     = false
-}
-
