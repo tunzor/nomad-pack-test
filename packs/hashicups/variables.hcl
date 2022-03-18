@@ -12,28 +12,28 @@ variable "region" {
 
 variable "frontend_version" {
   description = "Docker version tag"
-  default = "0.0.8.static"
+  default = "v1.0.2"
 }
 
 variable "public_api_version" {
   description = "Docker version tag"
-  default = "0.0.5"
+  default = "v0.0.6"
 }
 
 variable "payments_version" {
   description = "Docker version tag"
-  default = "0.0.16"
+  default = "v0.0.12"
 }
 
 variable "product_api_version" {
   description = "Docker version tag"
-  default = "0.0.19"
+  default = "v0.0.20"
 }
 
 
 variable "product_api_db_version" {
   description = "Docker version tag"
-  default = "0.0.19"
+  default = "v0.0.20"
 }
 
 variable "posgres_db" {
