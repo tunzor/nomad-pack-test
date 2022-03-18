@@ -38,9 +38,9 @@ job "hashicups" {
         ports = ["db"]
       }
       env {
-        POSTGRES_DB       = "products"
-        POSTGRES_USER     = "postgres"
-        POSTGRES_PASSWORD = "password"
+        POSTGRES_DB       = "[[ .hashicups.postgres_db ]]"
+        POSTGRES_USER     = "[[ .hashicups.postgres_user ]]"
+        POSTGRES_PASSWORD = "[[ .hashicups.postgress_password ]]"
       }
     }
 
@@ -51,7 +51,7 @@ job "hashicups" {
         ports = ["product-api"]
       }
       env {
-        DB_CONNECTION = "host=${NOMAD_IP_db} port=5432 user=postgres password=password dbname=products sslmode=disable"
+        DB_CONNECTION = "host=${NOMAD_IP_db} port=5432 user=[[ .hashicups.postgres_user ]] password=[[ .hashicups.postgres_password ]] dbname=[[ .hashicups.postgres_db ]] sslmode=disable"
         BIND_ADDRESS = "0.0.0.0:9090"
       }
     }
