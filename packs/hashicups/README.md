@@ -1,8 +1,11 @@
-Extended from [carljavier/nomad-pack-registry](https://github.com/carljavier/nomad-pack-registry)
-
 # Hashicups
 
-Hashicorp Demo Application to demonstrate various workflows and techniques.
+This version of HashiCups is meant to run on a Nomad cluster without the use of Consul for service discovery.
+
+## Prerequisites
+
+- Nomad cluster
+- Ability to access Nomad client on port 80 (with proper security group access, etc.)
 
 ## Install 
 

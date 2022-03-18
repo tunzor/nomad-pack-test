@@ -1,3 +1,3 @@
-# Managing External Traffic with Application Load Balancing
+# HashiCups Demo App with Nomad Pack
 
-This repo is a companion to the [Managing External Traffic with Application Load Balancing](https://learn.hashicorp.com/tutorials/nomad/external-application-load-balancing) tutorial, containing configuration files to create an Application Load Balancer (ALB) on AWS and use it to manage traffic to a Nomad-hosted application.
+Extended from [carljavier/nomad-pack-registry](https://github.com/carljavier/nomad-pack-registry)
