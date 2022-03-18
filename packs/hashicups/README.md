@@ -7,6 +7,6 @@ Hashicorp Demo Application to demonstrate various workflows and techniques.
 ## Install 
 
 ```
-nomad-pack registry add tunzor github.com/tunzor/nomad-pack-test --target=hashicups
+nomad-pack registry add tunzor https://github.com/tunzor/nomad-pack-test.git --target=hashicups
 nomad-pack run hashicups --registry=tunzor --ref=latest
 ```
