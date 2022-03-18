@@ -40,7 +40,7 @@ job "hashicups" {
       env {
         POSTGRES_DB       = "[[ .hashicups.postgres_db ]]"
         POSTGRES_USER     = "[[ .hashicups.postgres_user ]]"
-        POSTGRES_PASSWORD = "[[ .hashicups.postgress_password ]]"
+        POSTGRES_PASSWORD = "[[ .hashicups.postgres_password ]]"
       }
     }
 

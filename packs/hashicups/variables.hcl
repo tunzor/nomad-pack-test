@@ -45,7 +45,7 @@ variable "postgres_user" {
   default = "postgres"
 }
 
-variable "postgress_password" {
+variable "postgres_password" {
   description = "Postgres DB Password"
   default = "password"
 }
