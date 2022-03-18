@@ -72,8 +72,8 @@ job "hashicups" {
       }
       env {
         BIND_ADDRESS = ":8081"
-        PRODUCT_API_URI = "http://${NOMAD_IP_product-api}:${NOMAD_HOST_PORT_product-api}"
-        PAYMENT_API_URI = "http://${NOMAD_IP_payments-api}:${NOMAD_HOST_PORT_payments-api}"
+        PRODUCT_API_URI = "http://${NOMAD_ADDR_product-api}"
+        PAYMENT_API_URI = "http://${NOMAD_ADDR_payments-api}"
       }
     }
     
