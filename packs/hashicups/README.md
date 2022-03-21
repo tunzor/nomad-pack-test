@@ -56,8 +56,8 @@ See [this FAQ page](https://www.nomadproject.io/docs/faq#q-how-to-connect-to-my-
 |`postgres_user`|`postgres` (string)|The Postgres database user.|
 |`postgres_password`|`password` (string)|The Postgres database user's password.|
 |`db_port`|`5432` (number)|The Postgres database port.|
-|`product_api_port`|`9090` (number)|The products API port.|
-|`frontend_port`|`3000` (number)|The frontend port.|
-|`payments_api_port`|`8080` (number)|The payments API port.|
-|`public_api_port`|`8081` (number)|The public API port.|
+|`product_api_port`|`9090` (number)|The products API service port.|
+|`frontend_port`|`3000` (number)|The frontend service port.|
+|`payments_api_port`|`8080` (number)|The payments API service port.|
+|`public_api_port`|`8081` (number)|The public API service port.|
 |`nginx_port`|`80` (number)|The Nginx reverse proxy port.|
