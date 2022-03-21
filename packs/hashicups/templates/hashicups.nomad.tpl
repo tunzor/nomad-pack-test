@@ -15,7 +15,7 @@ job "hashicups" {
         static = [[ .hashicups.frontend_port ]]
       }
       port "payments-api" {
-        static = [[ .hashicups.db_port ]]
+        static = [[ .hashicups.payments_api_port ]]
       }
       port "public-api" {
         static = [[ .hashicups.public_api_port ]]
