@@ -27,6 +27,9 @@ job "hashicups" {
 
     task "db" {
       driver = "docker"
+      meta {
+        service = "database"
+      }
       config {
         image   = "hashicorpdemoapp/product-api-db:[[ .hashicups.product_api_db_version ]]"
         ports = ["db"]
@@ -40,6 +43,9 @@ job "hashicups" {
 
     task "product-api" {
       driver = "docker"
+      meta {
+        service = "product-api"
+      }
       config {
         image   = "hashicorpdemoapp/product-api:[[ .hashicups.product_api_version ]]"
         ports = ["product-api"]
@@ -50,8 +56,11 @@ job "hashicups" {
       }
     }
 
-    task "payment-api" {
+    task "payments-api" {
       driver = "docker"
+      meta {
+        service = "payments-api"
+      }
       config {
         image   = "hashicorpdemoapp/payments:[[ .hashicups.payments_version ]]"
         ports = ["payments-api"]
@@ -60,6 +69,9 @@ job "hashicups" {
     
     task "public-api" {
       driver = "docker"
+      meta {
+        service = "public-api"
+      }
       config {
         image   = "hashicorpdemoapp/public-api:[[ .hashicups.public_api_version ]]"
         ports = ["public-api"]
@@ -73,6 +85,9 @@ job "hashicups" {
     
     task "frontend" {
       driver = "docker"
+      meta {
+        service = "frontend"
+      }
       env {
         NEXT_PUBLIC_PUBLIC_API_URL= "/"
       }
@@ -84,6 +99,9 @@ job "hashicups" {
 
     task "nginx" {
       driver = "docker"
+      meta {
+        service = "nginx-reverse-proxy"
+      }
       config {
         image = "nginx:alpine"
         ports = ["nginx"]
