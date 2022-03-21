@@ -49,7 +49,7 @@ See [this FAQ page](https://www.nomadproject.io/docs/faq#q-how-to-connect-to-my-
 |`region`|`global` (string)|The region where the job should be placed.|
 |`frontend_version`|`v1.0.2` (string)|Frontend Docker image version.|
 |`public_api_version`|`v0.0.6` (string)|Public API Docker image version.|
-|`payments_version`|`v0.0.12` (string)Payements API Docker image version.|
+|`payments_version`|`v0.0.12` (string)|Payments API Docker image version.|
 |`product_api_version`|`v0.0.20` (string)|Product API Docker image version.|
 |`product_api_db_version`|`v0.0.20` (string)|Product API database Docker image version.|
 |`postgres_db`|`products` (string)|The Postgres database name.|
