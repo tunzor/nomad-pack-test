@@ -65,6 +65,11 @@ variable "frontend_port" {
   default = 3000
 }
 
+variable "payments_api_port" {
+  description = "Payments API Port"
+  default = 8080
+}
+
 variable "public_api_port" {
   description = "Public API Port"
   default = 8081
