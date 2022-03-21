@@ -49,3 +49,28 @@ variable "postgres_password" {
   description = "Postgres DB Password"
   default = "password"
 }
+
+variable "db_port" {
+  description = "Postgres DB Port"
+  default = 5432
+}
+
+variable "product_api_port" {
+  description = "Product API Port"
+  default = 9090
+}
+
+variable "frontend_port" {
+  description = "Frontend Port"
+  default = 3000
+}
+
+variable "public_api_port" {
+  description = "Public API Port"
+  default = 8081
+}
+
+variable "nginx_port" {
+  description = "Nginx Port"
+  default = 80
+}

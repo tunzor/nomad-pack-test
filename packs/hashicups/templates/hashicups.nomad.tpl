@@ -6,28 +6,22 @@ job "hashicups" {
   group "hashicups" {
     network {
       port "db" { 
-        static = 5432
-        to = 5432
+        static = [[ .hashicups.db_port ]]
       }
       port "product-api" {
-        static = 9090
-        to = 9090
+        static = [[ .hashicups.product_api_port ]]
       }
       port "frontend" {
-        static = 3000
-        to = 3000
+        static = [[ .hashicups.frontend_port ]]
       }
       port "payments-api" {
-        static = 8080
-        to = 8080
+        static = [[ .hashicups.db_port ]]
       }
       port "public-api" {
-        static = 8081
-        to = 8081
+        static = [[ .hashicups.public_api_port ]]
       }
       port "nginx" {
-        static = 80
-        to = 80
+        static = [[ .hashicups.nginx_port ]]
       }
     }
 
@@ -51,8 +45,8 @@ job "hashicups" {
         ports = ["product-api"]
       }
       env {
-        DB_CONNECTION = "host=${NOMAD_IP_db} port=5432 user=[[ .hashicups.postgres_user ]] password=[[ .hashicups.postgres_password ]] dbname=[[ .hashicups.postgres_db ]] sslmode=disable"
-        BIND_ADDRESS = "0.0.0.0:9090"
+        DB_CONNECTION = "host=${NOMAD_IP_db} port=[[ .hashicups.db_port ]] user=[[ .hashicups.postgres_user ]] password=[[ .hashicups.postgres_password ]] dbname=[[ .hashicups.postgres_db ]] sslmode=disable"
+        BIND_ADDRESS = "0.0.0.0:[[ .hashicups.product_api_port ]]"
       }
     }
 
@@ -71,7 +65,7 @@ job "hashicups" {
         ports = ["public-api"]
       }
       env {
-        BIND_ADDRESS = ":8081"
+        BIND_ADDRESS = ":[[ .hashicups.public_api_port ]]"
         PRODUCT_API_URI = "http://${NOMAD_ADDR_product-api}"
         PAYMENT_API_URI = "http://${NOMAD_ADDR_payments-api}"
       }
@@ -103,10 +97,10 @@ job "hashicups" {
         data =  <<EOF
 proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=STATIC:10m inactive=7d use_temp_path=off;
 upstream frontend_upstream {
-  server {{ env "NOMAD_IP_frontend" }}:3000;
+  server {{ env "NOMAD_IP_frontend" }}:[[ .hashicups.frontend_port ]];
 }
 server {
-  listen 80;
+  listen [[ .hashicups.nginx_port ]];
   server_name  {{ env "NOMAD_IP_nginx" }};
   server_tokens off;
   gzip on;
@@ -136,7 +130,7 @@ server {
     proxy_pass http://frontend_upstream;
   }
   location /api {
-    proxy_pass http://{{ env "NOMAD_IP_frontend" }}:8081;
+    proxy_pass http://{{ env "NOMAD_IP_frontend" }}:[[ .hashicups.public_api_port ]];
   }
 }
         EOF

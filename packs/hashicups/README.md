@@ -1,15 +1,42 @@
-# Hashicups
+# HashiCups
 
-This version of HashiCups is meant to run on a Nomad cluster without the use of Consul for service discovery.
+This version of [HashiCups]() is meant to run on a Nomad cluster without the use of Consul for service discovery.
+
+
 
 ## Prerequisites
 
-- Nomad cluster
-- Ability to access Nomad client on port 80 (with proper security group access, etc.)
+- Nomad cluster (a [local dev cluster](https://learn.hashicorp.com/tutorials/nomad/get-started-run) will work)
+- Ability to access Nomad client on port 80
 
 ## Install 
 
 ```
-nomad-pack registry add tunzor https://github.com/tunzor/nomad-pack-test.git --target=hashicups
+nomad-pack registry add tunzor https://github.com/tunzor/nomad-pack-test.git
 nomad-pack run hashicups --registry=tunzor --ref=latest
 ```
+
+## Docker Desktop Notes
+If you are running Nomad on your local machine with Docker Desktop, you'll need to bind the Nomad client to a non-loopback network interface so that the containers can communicate with each other.
+
+```
+$ nomad agent -dev -bind=0.0.0.0 -network-interface=en0
+```
+
+This will bind to the `en0` interface. You can retrieve the IP address associated with it by inspecting the interface and looking at the line starting with `inet`.
+
+```
+$ ifconfig
+en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+	options=400<CHANNEL_IO>
+	ether 88:66:5a:44:34:e8 
+	inet6 fe80::c5c:1de8:d154:9341%en0 prefixlen 64 secured scopeid 0x6 
+	inet 192.168.1.6 netmask 0xffffff00 broadcast 192.168.1.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect
+	status: active
+```
+
+With the above configuration, the Nomad UI can be accessed at `192.168.1.6:4646`. The HashiCups services can also be accessed with the same IP address on port `80` by default: `192.168.1.6:80`.
+
+See [this FAQ page](https://www.nomadproject.io/docs/faq#q-how-to-connect-to-my-host-network-when-using-docker-desktop-windows-and-macos) for more information.
