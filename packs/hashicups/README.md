@@ -1,6 +1,6 @@
 # HashiCups
 
-This version of [HashiCups](https://github.com/hashicorp-demoapp) is meant to run on a Nomad cluster without the use of Consul for service discovery.
+[HashiCups](https://github.com/hashicorp-demoapp) is a demo webapp of a coffee shop application. This pack is configured to run on a Nomad cluster without the use of Consul for service discovery.
 
 
 
@@ -37,7 +37,7 @@ en0: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
 	status: active
 ```
 
-With the above configuration, the Nomad UI can be accessed at `192.168.1.6:4646`. The HashiCups services can also be accessed with the same IP address on port `80` by default: `192.168.1.6:80`.
+With the above configuration, the Nomad UI can be accessed at `192.168.1.6:4646` and the HashiCups UI can be accessed with the same IP address on port `80` by default.
 
 See [this FAQ page](https://www.nomadproject.io/docs/faq#q-how-to-connect-to-my-host-network-when-using-docker-desktop-windows-and-macos) for more information.
 
@@ -50,8 +50,8 @@ See [this FAQ page](https://www.nomadproject.io/docs/faq#q-how-to-connect-to-my-
 |`frontend_version`|`v1.0.2` (string)|Frontend Docker image version.|
 |`public_api_version`|`v0.0.6` (string)|Public API Docker image version.|
 |`payments_version`|`v0.0.12` (string)|Payments API Docker image version.|
-|`product_api_version`|`v0.0.20` (string)|Product API Docker image version.|
-|`product_api_db_version`|`v0.0.20` (string)|Product API database Docker image version.|
+|`product_api_version`|`v0.0.20` (string)|Products API Docker image version.|
+|`product_api_db_version`|`v0.0.20` (string)|Products API database Docker image version.|
 |`postgres_db`|`products` (string)|The Postgres database name.|
 |`postgres_user`|`postgres` (string)|The Postgres database user.|
 |`postgres_password`|`password` (string)|The Postgres database user's password.|
