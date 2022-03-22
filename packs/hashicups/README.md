@@ -13,6 +13,8 @@
 
 ```
 nomad-pack registry add tunzor https://github.com/tunzor/nomad-pack-test.git
+```
+```
 nomad-pack run hashicups --registry=tunzor --ref=latest
 ```
 
